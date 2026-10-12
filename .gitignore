@@ -3,3 +3,7 @@ node_modules
 out
 .env*
 .DS_Store
+
+# Local tool / OS files
+.claude/
+desktop.ini

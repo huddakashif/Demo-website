@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <defs>
+    <linearGradient id="netGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#0088FF" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Hexagonal Tech Logo Icon -->
+  <g transform="translate(10, 8)">
+    <polygon points="24,2 45,14 45,38 24,50 3,38 3,14" stroke="url(#netGrad)" stroke-width="2.5" fill="#0c1836" fill-opacity="0.6" filter="url(#glow)"/>
+    <!-- Node connections inside -->
+    <circle cx="24" cy="14" r="3.5" fill="#00F0FF" />
+    <circle cx="14" cy="32" r="3" fill="#0088FF" />
+    <circle cx="34" cy="32" r="3" fill="#8B5CF6" />
+    <circle cx="24" cy="26" r="4" fill="#FFFFFF" />
+    <line x1="24" y1="14" x2="24" y2="26" stroke="#00F0FF" stroke-width="1.5" stroke-dasharray="2 2" />
+    <line x1="14" y1="32" x2="24" y2="26" stroke="#0088FF" stroke-width="1.5" />
+    <line x1="34" y1="32" x2="24" y2="26" stroke="#8B5CF6" stroke-width="1.5" />
+  </g>
+  <!-- Brand Typography -->
+  <text x="70" y="35" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="800" font-size="22" letter-spacing="-0.5">Net<tspan fill="#00F0FF">Sol</tspan></text>
+  <text x="71" y="49" fill="#94A3B8" font-family="'Inter', sans-serif" font-weight="600" font-size="10" letter-spacing="2.5">SERVICES</text>
+  <rect x="145" y="24" width="4" height="4" rx="1" fill="#00F0FF" opacity="0.8" />
+</svg>
