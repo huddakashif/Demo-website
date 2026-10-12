@@ -3,31 +3,48 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+// Soft brand-tinted wash: purple top-right, faint cyan left, fading to white.
+const HERO_BACKGROUND =
+  'radial-gradient(55% 60% at 90% 0%, rgba(103,80,164,0.12), transparent 70%), ' +
+  'radial-gradient(40% 50% at 0% 20%, rgba(0,180,200,0.06), transparent 70%), ' +
+  'linear-gradient(180deg, #fbf8ff 0%, #ffffff 100%)';
+
+const EDGE_REGIONS = [
+  { code: 'NYC1', city: 'New York', ms: 3.8 },
+  { code: 'LON1', city: 'London', ms: 5.2 },
+  { code: 'FRA1', city: 'Frankfurt', ms: 6.1 },
+  { code: 'SIN1', city: 'Singapore', ms: 7.4 },
+];
+const EDGE_AVG_MS = EDGE_REGIONS.reduce((sum, r) => sum + r.ms, 0) / EDGE_REGIONS.length;
+
+const HERO_STATS = [
+  { value: '99.99%', label: 'Uptime SLA' },
+  { value: '< 10 ms', label: 'Edge latency' },
+  { value: 'Tier-4', label: 'Certified datacenters' },
+  { value: '24/7/365', label: 'Live NOC engineers' },
+];
+
 export default function HomePage() {
   return (
     <>
-      <main className="w-full pt-20 bg-surface min-h-screen"><div className="flex flex-col w-full">
+      <main className="w-full bg-surface min-h-screen"><div className="flex flex-col w-full">
 
-<div className="relative w-full bg-surface-container-lowest overflow-hidden">
-<div className="absolute -top-40 right-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none hero-orb-float"></div>
-<div className="absolute top-1/3 -left-32 w-80 h-80 rounded-full bg-secondary-container/60 blur-3xl pointer-events-none network-pulse"></div>
+{/* Hero background runs up behind the translucent navbar so the top of the page reads as one surface */}
+<div className="relative w-full -mt-20 pt-20 border-b border-outline-variant/30" style={{ background: HERO_BACKGROUND }}>
 
-<section className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-24 motion-fade-in">
-<div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<section className="max-w-7xl mx-auto px-6 lg:px-12 pt-14 pb-12 lg:pt-20 lg:pb-16 motion-fade-in">
+<div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
-<div className="lg:col-span-7 space-y-8">
+<div className="lg:col-span-7 space-y-7">
 
-<div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container-high text-xs font-semibold text-primary tracking-wide shadow-sm animate-fade-up delay-100">
-<span className="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
-<span className="w-2 h-2 -ml-3.5 rounded-full bg-primary"></span>
+<div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-outline-variant/60 bg-surface-container-lowest/70 text-xs font-semibold text-primary tracking-wide animate-fade-up delay-100">
+<span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
 <span className="">Reliable Infrastructure. Professional Support.</span>
 </div>
 
-<h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline font-extrabold tracking-tight text-on-surface leading-[1.12] animate-fade-up delay-200">
-            Scalable 
-            <span className="shimmer-text">
-              Servers &amp; Hosting Solutions
-            </span> 
+<h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-headline font-extrabold tracking-tight text-on-surface leading-[1.1] animate-fade-up delay-200">
+            Scalable{' '}
+            <span className="shimmer-text">Servers &amp; Hosting Solutions</span>{' '}
             for Your Business
           </h1>
 
@@ -46,28 +63,50 @@ export default function HomePage() {
 </a>
 </div>
 
-<div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 animate-fade-up delay-400">
-<div className="p-4 rounded-xl bg-surface-container-low shadow-sm">
-<div className="text-2xl font-bold font-headline text-primary">99.99%</div>
-<div className="text-xs text-on-surface-variant mt-1 font-medium">Uptime SLA Guaranteed</div>
 </div>
-<div className="p-4 rounded-xl bg-surface-container-low shadow-sm">
-<div className="text-2xl font-bold font-headline text-primary">&lt; 10ms</div>
-<div className="text-xs text-on-surface-variant mt-1 font-medium">Global Edge Sync</div>
+
+{/* Terminal-style latency check replaces the 3D render */}
+<div className="lg:col-span-5 animate-fade-up delay-300">
+<div className="rounded-xl overflow-hidden border border-[#2b2535] bg-[#16131d] shadow-[0_24px_48px_-16px_rgba(40,24,80,0.45)]" role="img" aria-label={`Latency check: all ${EDGE_REGIONS.length} edge regions respond in under 10 milliseconds`}>
+<div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/[0.03]">
+<span className="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+<span className="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+<span className="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+<span className="ml-2 text-[11px] font-mono text-[#948f99]">netsol-cli — edge status</span>
 </div>
-<div className="p-4 rounded-xl bg-surface-container-low shadow-sm">
-<div className="text-2xl font-bold font-headline text-primary">Tier-4</div>
-<div className="text-xs text-on-surface-variant mt-1 font-medium">Certified Datacenters</div>
+<div className="p-5 sm:p-6 font-mono text-[12.5px] sm:text-[13px] leading-relaxed text-[#e6e0e9]">
+<div><span className="text-[#cfbcff]">netsol@edge</span><span className="text-[#948f99]">:~$</span> netsol ping --regions all</div>
+<div className="text-[#948f99] mt-1">Probing {EDGE_REGIONS.length} edge regions over 10GbE backbone…</div>
+<div className="mt-5 space-y-3">
+{EDGE_REGIONS.map((r) => (
+<div key={r.code} className="flex items-center gap-3">
+<span className="w-11 text-[#cfbcff]">{r.code}</span>
+<span className="flex-1 text-[#948f99] truncate">{r.city}</span>
+<span className="hidden sm:block w-24 h-1.5 rounded-full bg-white/10 overflow-hidden"><span className="block h-full rounded-full bg-[#5ee7f2]" style={{ width: `${r.ms * 10}%` }}></span></span>
+<span className="w-16 text-right tabular-nums">{r.ms.toFixed(1)} ms</span>
+<span className="text-[#4ade80]">✓</span>
 </div>
-<div className="p-4 rounded-xl bg-surface-container-low shadow-sm">
-<div className="text-2xl font-bold font-headline text-primary">24/7/365</div>
-<div className="text-xs text-on-surface-variant mt-1 font-medium">Live NOC Engineering</div>
+))}
+</div>
+<div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+<span><span className="text-[#4ade80]">●</span> {EDGE_REGIONS.length}/{EDGE_REGIONS.length} regions healthy</span>
+<span className="text-[#948f99]">avg <span className="text-[#5ee7f2]">{EDGE_AVG_MS.toFixed(1)} ms</span></span>
+</div>
+<div className="mt-4"><span className="text-[#cfbcff]">netsol@edge</span><span className="text-[#948f99]">:~$</span> <span className="inline-block w-2 h-4 -mb-0.5 bg-[#cfbcff]/80"></span></div>
+</div>
 </div>
 </div>
 </div>
 
-<div className="lg:col-span-5 relative motion-float"><div className="relative rounded-3xl bg-surface-container overflow-hidden shadow-xl p-3 border border-outline-variant/20"><div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-inverse-surface"><img alt="High tech automated server datacenter rack" className="w-full h-full object-cover object-center" src="/images/3d-servers.png" /><div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent pointer-events-none"></div><div className="absolute bottom-6 left-6 right-6 flex items-center justify-between p-4 rounded-xl bg-surface/90 backdrop-blur-md shadow-lg"><div className="flex items-center gap-3"><span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse"></span><div><div className="text-xs font-bold text-on-surface font-headline">Global Edge Backbone</div><div className="text-[11px] text-on-surface-variant font-medium">&lt; 8ms latency across all nodes</div></div></div><span className="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed text-xs font-semibold">100% Operational</span></div></div></div></div>
+{/* Key figures, aligned to the hero grid as one strip */}
+<dl className="mt-14 lg:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-y-6 border-t border-outline-variant/40 pt-8 animate-fade-up delay-400">
+{HERO_STATS.map((s, i) => (
+<div key={s.label} className={`px-0 lg:px-6 ${i === 0 ? 'lg:pl-0' : 'lg:border-l lg:border-outline-variant/40'} ${i % 2 === 1 ? 'pl-6 border-l border-outline-variant/40 lg:pl-6' : ''}`}>
+<dt className="text-xs font-medium text-on-surface-variant">{s.label}</dt>
+<dd className="text-2xl font-bold font-headline text-on-surface mt-1">{s.value}</dd>
 </div>
+))}
+</dl>
 </section>
 </div>
 

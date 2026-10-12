@@ -149,7 +149,7 @@ export default function Navbar() {
 
           <Link
             href="/login"
-            className={`px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors ${
+            className={`px-3.5 py-2 text-sm font-semibold rounded-lg whitespace-nowrap transition-colors ${
               pathname === '/login' ? 'text-[#4f378a]' : 'text-[#494551] hover:text-[#4f378a]'
             }`}
           >
@@ -158,7 +158,7 @@ export default function Navbar() {
 
           <Link
             href="/signup"
-            className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-[#4f378a] text-white font-semibold text-sm shadow hover:bg-[#6750a4] active:scale-95 transition-all"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-xl whitespace-nowrap bg-[#4f378a] text-white font-semibold text-sm shadow hover:bg-[#6750a4] active:scale-95 transition-all"
           >
             Sign Up
           </Link>
